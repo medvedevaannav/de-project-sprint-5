@@ -1,0 +1,11 @@
+api-->stg  
+dags\stg\delivery_system_dag -даг по проекту по загрузке из API в STG(extra к урокам) 
+
+stg-->dds
+добавлены таски в оснвному дагу
+\dags\dds\dm_couriers_prj5.py
+\dags\dds\dm_deliveries_prj5.py
+stg-->cdm
+dags\cdm\dm_courier_ledger_group.py
+
+таблицы проекта в файле create_table_for_prj.sql 
