@@ -19,7 +19,14 @@ CREATE TABLE stg.orderdelivery_deliveries (
 	update_ts timestamp NOT NULL DEFAULT now(),
 	CONSTRAINT orderdelivery_deliveries_pkey PRIMARY KEY (id)
 );
-
+CREATE TABLE dds.dm_couriers (
+	id serial4 NOT NULL,
+	courier_id varchar NULL,
+	courier_name varchar NOT NULL,
+	load_dt timestamp NOT NULL DEFAULT now(),
+	CONSTRAINT dm_couriers_courier_id UNIQUE (courier_id),
+	CONSTRAINT dm_couriers_pkey PRIMARY KEY (id)
+);
 --dds
 CREATE TABLE dds.dm_deliveries (
 	id serial4 NOT NULL,
@@ -34,17 +41,10 @@ CREATE TABLE dds.dm_deliveries (
 	tip_sum numeric(14, 2) NOT NULL,
 	load_dt timestamp NOT NULL DEFAULT now(),
 	CONSTRAINT dm_deliveries_id_uindex UNIQUE (delivery_id, courier_id, order_id),
-	CONSTRAINT dm_deliveries_pkey PRIMARY KEY (id)
+	CONSTRAINT dm_deliveries_pkey PRIMARY KEY (id),
+	constraint dm_deliveries_courier_id_fkey foreign key (courier_id) references dds.dm_couriers (courier_id)
 );
 
-CREATE TABLE dds.dm_couriers (
-	id serial4 NOT NULL,
-	courier_id varchar NULL,
-	courier_name varchar NOT NULL,
-	load_dt timestamp NOT NULL DEFAULT now(),
-	CONSTRAINT dm_couriers_courier_id UNIQUE (courier_id),
-	CONSTRAINT dm_couriers_pkey PRIMARY KEY (id)
-);
 --витрина
 CREATE TABLE cdm.dm_courier_ledger (
 	id serial4 NOT NULL,
